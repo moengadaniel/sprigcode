@@ -1,0 +1,25 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Demonstrate fail-closed behavior for ambiguous call anchors.",
+  "ops": [
+    {
+      "id": "insert-rate-limit-check",
+      "op": "insert_statement_before_call",
+      "anchor": {
+        "type": "call",
+        "callee": "sendPasswordResetEmail",
+        "file": "src/auth/reset-password.ts"
+      },
+      "statement": "await rateLimit.check(email);"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "match_count",
+      "opId": "insert-rate-limit-check",
+      "exactly": 1
+    }
+  ]
+}
+

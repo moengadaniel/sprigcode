@@ -1,0 +1,26 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Extend a query object with tenantId.",
+  "ops": [
+    {
+      "id": "extend-query",
+      "op": "extend_object_literal",
+      "anchor": {
+        "type": "objectProperty",
+        "key": "where",
+        "file": "src/index.ts"
+      },
+      "property": {
+        "key": "tenantId",
+        "value": "tenantId"
+      }
+    }
+  ],
+  "constraints": [
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+

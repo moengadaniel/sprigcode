@@ -1,0 +1,27 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Add tenantId to getUser and update direct call sites.",
+  "ops": [
+    {
+      "id": "add-tenant-id",
+      "op": "add_required_parameter",
+      "anchor": {
+        "type": "symbol",
+        "name": "getUser",
+        "file": "src/index.ts",
+        "kind": "function"
+      },
+      "parameterName": "tenantId",
+      "parameterType": "string",
+      "value": "\"tenant-1\"",
+      "updateCallSites": true
+    }
+  ],
+  "constraints": [
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+

@@ -1,0 +1,36 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Insert a rate-limit check before sending a password reset email.",
+  "ops": [
+    {
+      "id": "add-rate-limit-import",
+      "op": "add_import",
+      "file": "src/auth/reset-password.ts",
+      "from": "@/lib/rate-limit",
+      "named": ["rateLimit"]
+    },
+    {
+      "id": "insert-rate-limit-check",
+      "op": "insert_statement_before_call",
+      "anchor": {
+        "type": "call",
+        "callee": "sendPasswordResetEmail",
+        "file": "src/auth/reset-password.ts",
+        "enclosingFunction": "requestPasswordReset"
+      },
+      "statement": "await rateLimit.check(email);"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "match_count",
+      "opId": "insert-rate-limit-check",
+      "exactly": 1
+    },
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+

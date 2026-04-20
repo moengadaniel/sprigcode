@@ -1,0 +1,24 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Rename getUser to loadUser.",
+  "ops": [
+    {
+      "id": "rename-user-loader",
+      "op": "rename_symbol",
+      "anchor": {
+        "type": "symbol",
+        "name": "getUser",
+        "file": "src/index.ts",
+        "kind": "function"
+      },
+      "newName": "loadUser"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+

@@ -1,0 +1,20 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Add a helper import.",
+  "ops": [
+    {
+      "id": "add-helper-import",
+      "op": "add_import",
+      "file": "src/index.ts",
+      "from": "./helper",
+      "named": ["helper"]
+    }
+  ],
+  "constraints": [
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+

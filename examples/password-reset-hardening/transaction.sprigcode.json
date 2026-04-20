@@ -1,0 +1,77 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Harden password reset handling with tenant-aware audit and rate limiting.",
+  "ops": [
+    {
+      "id": "add-rate-limit-import",
+      "op": "add_import",
+      "file": "src/auth/reset-password.ts",
+      "from": "@/lib/rate-limit",
+      "named": ["rateLimit"]
+    },
+    {
+      "id": "add-tenant-id-parameter",
+      "op": "add_required_parameter",
+      "anchor": {
+        "type": "symbol",
+        "name": "requestPasswordReset",
+        "file": "src/auth/reset-password.ts",
+        "kind": "function"
+      },
+      "parameterName": "tenantId",
+      "parameterType": "string",
+      "value": "tenantId",
+      "updateCallSites": true
+    },
+    {
+      "id": "add-tenant-id-to-audit-event",
+      "op": "extend_object_literal",
+      "anchor": {
+        "type": "objectProperty",
+        "key": "where",
+        "file": "src/auth/reset-password.ts"
+      },
+      "property": {
+        "key": "tenantId",
+        "value": "tenantId"
+      }
+    },
+    {
+      "id": "insert-rate-limit-check",
+      "op": "insert_statement_before_call",
+      "anchor": {
+        "type": "call",
+        "callee": "sendPasswordResetEmail",
+        "file": "src/auth/reset-password.ts",
+        "enclosingFunction": "requestPasswordReset"
+      },
+      "statement": "await rateLimit.check(email);"
+    },
+    {
+      "id": "update-email-call",
+      "op": "replace_call_expression",
+      "anchor": {
+        "type": "call",
+        "callee": "sendPasswordResetEmail",
+        "file": "src/auth/reset-password.ts",
+        "enclosingFunction": "requestPasswordReset"
+      },
+      "replacement": "sendPasswordResetEmail(email, tenantId)"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "match_count",
+      "opId": "insert-rate-limit-check",
+      "exactly": 1
+    },
+    {
+      "type": "typecheck"
+    },
+    {
+      "type": "idempotent"
+    }
+  ]
+}
+
