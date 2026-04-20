@@ -1,0 +1,39 @@
+{
+  "name": "@sprigcode/schema",
+  "version": "0.1.0",
+  "description": "JSON schema for Sprigcode transaction documents.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eat-apples/sprigcode.git",
+    "directory": "packages/schema"
+  },
+  "bugs": {
+    "url": "https://github.com/eat-apples/sprigcode/issues"
+  },
+  "homepage": "https://github.com/eat-apples/sprigcode/tree/main/packages/schema#readme",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json && node dist/index.js --check-schema",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@sprigcode/testkit",
+  "version": "0.1.0",
+  "description": "Fixture and golden-test utilities for Sprigcode adapters.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eat-apples/sprigcode.git",
+    "directory": "packages/testkit"
+  },
+  "bugs": {
+    "url": "https://github.com/eat-apples/sprigcode/issues"
+  },
+  "homepage": "https://github.com/eat-apples/sprigcode/tree/main/packages/testkit#readme",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@sprigcode/core": "workspace:*"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  }
+}

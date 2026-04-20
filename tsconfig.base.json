@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@sprigcode/core": ["packages/core/src/index.ts"],
+      "@sprigcode/schema": ["packages/schema/src/index.ts"],
+      "@sprigcode/testkit": ["packages/testkit/src/index.ts"],
+      "@sprigcode/ts": ["packages/ts/src/index.ts"],
+      "@sprigcode/cli": ["packages/cli/src/index.ts"]
+    },
+    "strict": true,
+    "noImplicitOverride": true,
+    "noUncheckedIndexedAccess": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "lib": ["ES2022"],
+    "types": ["node", "vitest/globals"]
+  }
+}
