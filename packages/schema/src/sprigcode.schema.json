@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sprigcode.dev/schema/sprigcode.schema.json",
+  "title": "Sprigcode Transaction Format",
+  "type": "object",
+  "required": ["version", "language", "ops"],
+  "properties": {
+    "version": {
+      "const": "0.1"
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "ops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "op"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "op": {
+            "enum": [
+              "add_import",
+              "remove_import",
+              "rename_symbol",
+              "add_required_parameter",
+              "update_call_sites",
+              "extend_object_literal",
+              "replace_call_expression",
+              "insert_statement_before_call"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  },
+  "additionalProperties": true
+}
+
