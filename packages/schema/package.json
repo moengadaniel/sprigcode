@@ -1,6 +1,6 @@
 {
   "name": "@sprigcode/schema",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JSON schema for Sprigcode transaction documents.",
   "license": "Apache-2.0",
   "repository": {
@@ -23,6 +23,7 @@
   },
   "files": [
     "dist",
+    "README.md",
     "LICENSE"
   ],
   "publishConfig": {

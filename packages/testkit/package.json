@@ -1,6 +1,6 @@
 {
   "name": "@sprigcode/testkit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Fixture and golden-test utilities for Sprigcode adapters.",
   "license": "Apache-2.0",
   "repository": {
@@ -23,6 +23,7 @@
   },
   "files": [
     "dist",
+    "README.md",
     "LICENSE"
   ],
   "publishConfig": {
