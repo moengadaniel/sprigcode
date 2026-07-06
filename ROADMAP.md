@@ -1,6 +1,6 @@
 # Roadmap
 
-## v0.1
+## v0.1 line
 
 The goal is not breadth. The goal is credibility.
 
@@ -9,7 +9,7 @@ Priority order:
 1. make the TypeScript and TSX slice excellent
 2. strengthen fail-closed behavior
 3. make demos and docs immediately convincing
-4. make package and CLI ergonomics clean enough for first public use
+4. keep package and CLI ergonomics clear for public use
 
 ## Near-term follow-up
 

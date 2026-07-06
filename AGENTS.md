@@ -205,7 +205,7 @@ If a command fails:
 
 ## Release Rules
 
-Do not release v0.1 until:
+Before any release:
 
 - all packages build
 - CLI validate, check, and apply work
