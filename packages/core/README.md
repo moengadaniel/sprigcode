@@ -36,9 +36,8 @@ Use `@sprigcode/core` together with a language adapter such as `@sprigcode/ts`.
 
 ## Repository
 
-https://github.com/eat-apples/sprigcode
+https://github.com/moengadaniel/sprigcode
 
 ## License
 
 Apache-2.0
-

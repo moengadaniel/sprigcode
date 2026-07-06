@@ -1,7 +1,7 @@
 {
   "name": "sprigcode",
   "private": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Typed semantic code-edit transactions for tools and agents.",
   "license": "Apache-2.0",
   "repository": {
@@ -23,18 +23,20 @@
     "ROADMAP.md",
     "SECURITY.md"
   ],
-  "packageManager": "pnpm@10.11.0",
+  "workspaces": [
+    "packages/*"
+  ],
   "engines": {
     "node": ">=22.0.0"
   },
   "scripts": {
-    "build": "corepack pnpm -r build",
+    "build": "npm run build -w @sprigcode/core && npm run build -w @sprigcode/schema && npm run build -w @sprigcode/testkit && npm run build -w @sprigcode/ts && npm run build -w @sprigcode/cli",
     "lint": "eslint \"packages/**/*.ts\"",
     "typecheck": "tsc -b --pretty false",
-    "test": "corepack pnpm -r test",
-    "test:golden": "corepack pnpm --filter @sprigcode/ts test:golden",
-    "test:smoke": "corepack pnpm build && node scripts/smoke.mjs",
-    "test:npm-smoke": "corepack pnpm build && node scripts/npm-smoke.mjs"
+    "test": "npm test --workspaces --if-present",
+    "test:golden": "npm run test:golden -w @sprigcode/ts",
+    "test:smoke": "npm run build && node scripts/smoke.mjs",
+    "test:npm-smoke": "npm run build && node scripts/npm-smoke.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",

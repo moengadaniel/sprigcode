@@ -1,0 +1,57 @@
+name: Bug report
+description: Report a correctness issue, typed failure issue, or unexpected edit result.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should Sprigcode have done instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Wrong edit
+        - Missing refusal
+        - Incorrect typed error
+        - CLI or packaging issue
+        - Documentation issue
+    validations:
+      required: true
+  - type: textarea
+    id: transaction
+    attributes:
+      label: Transaction
+      description: Include the smallest transaction document that reproduces the issue.
+      render: json
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Workspace shape
+      description: Include the smallest relevant TypeScript/TSX snippet or fixture layout.
+      render: text
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+      description: Include CLI output, JSON output, typed error code, and diff if one was produced.
+      render: text
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction
+      description: List exact commands to reproduce.
+      render: bash
+    validations:
+      required: true

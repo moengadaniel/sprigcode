@@ -1,17 +1,17 @@
 {
   "name": "@sprigcode/ts",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TypeScript adapter for Sprigcode semantic edit transactions.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eat-apples/sprigcode.git",
+    "url": "git+https://github.com/moengadaniel/sprigcode.git",
     "directory": "packages/ts"
   },
   "bugs": {
-    "url": "https://github.com/eat-apples/sprigcode/issues"
+    "url": "https://github.com/moengadaniel/sprigcode/issues"
   },
-  "homepage": "https://github.com/eat-apples/sprigcode/tree/main/packages/ts#readme",
+  "homepage": "https://github.com/moengadaniel/sprigcode/tree/main/packages/ts#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,11 +30,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@sprigcode/core": "workspace:*",
+    "@sprigcode/core": "0.1.2",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@sprigcode/testkit": "workspace:*"
+    "@sprigcode/testkit": "0.1.2"
   },
   "scripts": {
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",

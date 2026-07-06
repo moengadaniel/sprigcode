@@ -6,7 +6,6 @@ import { spawn } from "node:child_process";
 
 const root = process.cwd();
 const publicPackages = ["schema", "core", "ts", "testkit", "cli"];
-const corepackBin = process.platform === "win32" ? "corepack.cmd" : "corepack";
 const npmBin = process.platform === "win32" ? "npm.cmd" : "npm";
 const releaseVersion = JSON.parse(await readFile(path.join(root, "packages", "core", "package.json"), "utf8")).version;
 
@@ -52,8 +51,13 @@ async function main() {
   const consumerRoot = await mkdtemp(path.join(os.tmpdir(), "sprigcode-consumer-"));
 
   try {
-    const pack = await run(corepackBin, ["pnpm", "-r", "pack", "--pack-destination", packDir], { cwd: root });
-    assert(pack.code === 0, "Packing public packages failed.", `${pack.stdout}\n${pack.stderr}`);
+    for (const name of publicPackages) {
+      const workspace = `@sprigcode/${name}`;
+      const pack = await run(npmBin, ["pack", "--workspace", workspace, "--pack-destination", packDir], {
+        cwd: root
+      });
+      assert(pack.code === 0, `Packing ${workspace} failed.`, `${pack.stdout}\n${pack.stderr}`);
+    }
 
     const tarballs = publicPackages.map((name) => path.join(packDir, `sprigcode-${name}-${releaseVersion}.tgz`));
     for (const tarball of tarballs) {

@@ -1,0 +1,49 @@
+name: Operation request
+description: Propose a narrow typed edit operation or operation improvement.
+title: "[Operation] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete edit should become safer or easier to express?
+    validations:
+      required: true
+  - type: textarea
+    id: operation
+    attributes:
+      label: Proposed operation
+      description: Describe the narrowest useful typed operation or change to an existing operation.
+    validations:
+      required: true
+  - type: textarea
+    id: owner
+    attributes:
+      label: Where this belongs
+      description: Explain whether this belongs in core, the TypeScript adapter, the CLI, or documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: failure-model
+    attributes:
+      label: Failure model
+      description: How should this fail closed when anchors, syntax, scope, or constraints are not safe?
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test plan
+      description: Name the success, missing-anchor, ambiguous-anchor, idempotence, rollback, or typed-failure tests that should exist.
+    validations:
+      required: true
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This is not a request for a chatbot, SaaS dashboard, marketplace, or broad language support.
+          required: true
+        - label: This does not require unsupported claims about correctness or adoption.
+          required: true

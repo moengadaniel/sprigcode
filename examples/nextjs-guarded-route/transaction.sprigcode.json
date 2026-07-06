@@ -1,0 +1,35 @@
+{
+  "version": "0.1",
+  "language": "typescript",
+  "description": "Insert an admin guard before charging a customer in a route handler.",
+  "ops": [
+    {
+      "id": "add-authz-import",
+      "op": "add_import",
+      "file": "src/app/api/billing/route.ts",
+      "from": "@/lib/authz",
+      "named": ["requireAdmin"]
+    },
+    {
+      "id": "insert-admin-guard",
+      "op": "insert_statement_before_call",
+      "anchor": {
+        "type": "call",
+        "callee": "chargeCustomer",
+        "file": "src/app/api/billing/route.ts",
+        "enclosingFunction": "POST"
+      },
+      "statement": "await requireAdmin(request);"
+    }
+  ],
+  "constraints": [
+    {
+      "type": "match_count",
+      "opId": "insert-admin-guard",
+      "exactly": 1
+    },
+    {
+      "type": "idempotent"
+    }
+  ]
+}

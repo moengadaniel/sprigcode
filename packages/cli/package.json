@@ -1,17 +1,17 @@
 {
   "name": "@sprigcode/cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "CLI for typed semantic code-edit transactions.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eat-apples/sprigcode.git",
+    "url": "git+https://github.com/moengadaniel/sprigcode.git",
     "directory": "packages/cli"
   },
   "bugs": {
-    "url": "https://github.com/eat-apples/sprigcode/issues"
+    "url": "https://github.com/moengadaniel/sprigcode/issues"
   },
-  "homepage": "https://github.com/eat-apples/sprigcode/tree/main/packages/cli#readme",
+  "homepage": "https://github.com/moengadaniel/sprigcode/tree/main/packages/cli#readme",
   "type": "module",
   "bin": {
     "sprigcode": "dist/index.js"
@@ -33,9 +33,9 @@
     "access": "public"
   },
   "dependencies": {
-    "@sprigcode/core": "workspace:*",
-    "@sprigcode/schema": "workspace:*",
-    "@sprigcode/ts": "workspace:*"
+    "@sprigcode/core": "0.1.2",
+    "@sprigcode/schema": "0.1.2",
+    "@sprigcode/ts": "0.1.2"
   },
   "scripts": {
     "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc -p tsconfig.build.json",

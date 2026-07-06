@@ -76,38 +76,43 @@ async function assertDirectoriesMatch(actualRoot, expectedRoot) {
   }
 }
 
-async function main() {
-  if (!existsSync(cliEntry)) {
-    throw new Error(`CLI build output not found at ${cliEntry}. Run the build before smoke tests.`);
-  }
-
-  const successExample = path.join(root, "examples", "password-reset-rate-limit");
-  const successWorkspace = await mkdtemp(path.join(os.tmpdir(), "sprigcode-smoke-success-"));
-  await cp(path.join(successExample, "before"), successWorkspace, { recursive: true });
+async function runSuccessExample(exampleName, label) {
+  const exampleRoot = path.join(root, "examples", exampleName);
+  const workspace = await mkdtemp(path.join(os.tmpdir(), `sprigcode-smoke-${exampleName}-`));
+  await cp(path.join(exampleRoot, "before"), workspace, { recursive: true });
 
   try {
     const apply = await runNode([
       cliEntry,
       "apply",
-      path.join(successExample, "transaction.sprigcode.json"),
+      path.join(exampleRoot, "transaction.sprigcode.json"),
       "--workspace",
-      successWorkspace,
+      workspace,
       "--json"
     ]);
 
     if (apply.code !== 0) {
-      throw new Error(`Flagship smoke demo failed.\n${apply.stdout}\n${apply.stderr}`);
+      throw new Error(`${label} smoke demo failed.\n${apply.stdout}\n${apply.stderr}`);
     }
 
-    const successPayload = JSON.parse(apply.stdout);
-    if (!successPayload.ok || successPayload.transaction.status !== "verified") {
-      throw new Error(`Unexpected flagship demo JSON output.\n${apply.stdout}`);
+    const payload = JSON.parse(apply.stdout);
+    if (!payload.ok || payload.transaction.status !== "verified") {
+      throw new Error(`Unexpected ${label} demo JSON output.\n${apply.stdout}`);
     }
 
-    await assertDirectoriesMatch(successWorkspace, path.join(successExample, "after"));
+    await assertDirectoriesMatch(workspace, path.join(exampleRoot, "after"));
   } finally {
-    await rm(successWorkspace, { recursive: true, force: true });
+    await rm(workspace, { recursive: true, force: true });
   }
+}
+
+async function main() {
+  if (!existsSync(cliEntry)) {
+    throw new Error(`CLI build output not found at ${cliEntry}. Run the build before smoke tests.`);
+  }
+
+  await runSuccessExample("password-reset-rate-limit", "Flagship");
+  await runSuccessExample("nextjs-guarded-route", "Next.js guarded route");
 
   const failureExample = path.join(root, "examples", "ambiguous-anchor-failure");
   const failureWorkspace = await mkdtemp(path.join(os.tmpdir(), "sprigcode-smoke-failure-"));

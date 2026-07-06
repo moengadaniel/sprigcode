@@ -24,7 +24,7 @@ Sprigcode is not:
 Use these names consistently:
 
 - Project: `Sprigcode`
-- Repository: `eat-apples/sprigcode`
+- Repository: `moengadaniel/sprigcode`
 - CLI: `sprigcode`
 - Transaction file example: `transaction.sprigcode.json`
 - Protocol: `Sprigcode Transaction Format`
@@ -183,12 +183,14 @@ Do not claim Sprigcode is perfect or universally correct.
 Coding agents must run the verification loop before reporting completion:
 
 ```bash
-corepack pnpm install
-corepack pnpm lint
-corepack pnpm typecheck
-corepack pnpm test
-corepack pnpm test:golden
-corepack pnpm build
+npm install
+npm run lint
+npm run typecheck
+npm test
+npm run test:golden
+npm run test:smoke
+npm run test:npm-smoke
+npm run build
 ```
 
 If the task touches demos, packaging, or installation flows, also run any
@@ -225,4 +227,3 @@ For deeper detail, see:
 - `docs/testing-strategy.md`
 - `docs/accuracy-contract.md`
 - `docs/cli.md`
-- `docs/launch-readiness.md`

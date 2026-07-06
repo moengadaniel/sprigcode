@@ -1,17 +1,17 @@
 {
   "name": "@sprigcode/schema",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JSON schema for Sprigcode transaction documents.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eat-apples/sprigcode.git",
+    "url": "git+https://github.com/moengadaniel/sprigcode.git",
     "directory": "packages/schema"
   },
   "bugs": {
-    "url": "https://github.com/eat-apples/sprigcode/issues"
+    "url": "https://github.com/moengadaniel/sprigcode/issues"
   },
-  "homepage": "https://github.com/eat-apples/sprigcode/tree/main/packages/schema#readme",
+  "homepage": "https://github.com/moengadaniel/sprigcode/tree/main/packages/schema#readme",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

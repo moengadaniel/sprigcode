@@ -1,0 +1,51 @@
+name: Fixture case
+description: Submit a TypeScript/TSX pattern Sprigcode should edit safely or refuse.
+title: "[Fixture] "
+labels: ["fixtures"]
+body:
+  - type: textarea
+    id: pattern
+    attributes:
+      label: Pattern
+      description: What real TypeScript/TSX shape should Sprigcode handle?
+    validations:
+      required: true
+  - type: dropdown
+    id: expected
+    attributes:
+      label: Expected result
+      options:
+        - Safe edit
+        - Typed refusal
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: before
+    attributes:
+      label: Before
+      description: Provide the smallest source snippet or fixture layout.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: transaction
+    attributes:
+      label: Transaction
+      description: Include a proposed transaction document if you have one.
+      render: json
+  - type: textarea
+    id: after-or-error
+    attributes:
+      label: Expected after-state or error
+      description: For safe edits, show the expected output. For refusals, name the typed error code.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why this matters
+      description: Explain why guessing would be unsafe, or why this edit should be deterministic.
+    validations:
+      required: true

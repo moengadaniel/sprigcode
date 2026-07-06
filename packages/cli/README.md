@@ -33,9 +33,8 @@ npx @sprigcode/cli apply transaction.sprigcode.json --workspace .
 
 ## Repository
 
-https://github.com/eat-apples/sprigcode
+https://github.com/moengadaniel/sprigcode
 
 ## License
 
 Apache-2.0
-

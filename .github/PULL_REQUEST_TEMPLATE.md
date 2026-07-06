@@ -16,13 +16,13 @@ Explain why this change helps Sprigcode's core mission:
 List the commands you ran and their outcomes.
 
 ```bash
-corepack pnpm lint
-corepack pnpm typecheck
-corepack pnpm test
-corepack pnpm test:golden
-corepack pnpm test:smoke
-corepack pnpm test:npm-smoke
-corepack pnpm build
+npm run lint
+npm run typecheck
+npm test
+npm run test:golden
+npm run test:smoke
+npm run test:npm-smoke
+npm run build
 ```
 
 ## Risk
@@ -32,4 +32,3 @@ Call out any public API, failure-model, or correctness risk.
 ## Docs
 
 Note any README, docs, examples, or governance updates.
-

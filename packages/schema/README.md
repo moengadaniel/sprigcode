@@ -30,9 +30,8 @@ console.log(sprigcodeSchema.$schema);
 
 ## Repository
 
-https://github.com/eat-apples/sprigcode
+https://github.com/moengadaniel/sprigcode
 
 ## License
 
 Apache-2.0
-
