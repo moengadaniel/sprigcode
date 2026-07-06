@@ -1,7 +1,7 @@
 name: Fixture case
 description: Submit a TypeScript/TSX pattern Sprigcode should edit safely or refuse.
 title: "[Fixture] "
-labels: ["fixtures"]
+labels: ["enhancement"]
 body:
   - type: textarea
     id: pattern

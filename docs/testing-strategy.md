@@ -15,7 +15,7 @@ be trusted only if the tests prove the failure model and the edit model.
 - idempotence is enforced
 - golden examples stay stable
 - CLI JSON output is machine-readable
-- the flagship demo works
+- the password reset demo works
 - the failure demo refuses with `ANCHOR_NOT_UNIQUE`
 
 ## Current test layers

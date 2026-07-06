@@ -111,7 +111,7 @@ async function main() {
     throw new Error(`CLI build output not found at ${cliEntry}. Run the build before smoke tests.`);
   }
 
-  await runSuccessExample("password-reset-rate-limit", "Flagship");
+  await runSuccessExample("password-reset-rate-limit", "Password reset demo");
   await runSuccessExample("nextjs-guarded-route", "Next.js guarded route");
 
   const failureExample = path.join(root, "examples", "ambiguous-anchor-failure");

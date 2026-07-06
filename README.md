@@ -109,9 +109,9 @@ guessing.
 - If you need broad syntax support immediately, wait until the TypeScript slice
   is stronger.
 
-## The 60-second demo
+## The demo
 
-The flagship demo lives in `examples/password-reset-rate-limit/`.
+The demo lives in `examples/password-reset-rate-limit/`.
 
 It changes one file in one realistic way:
 
@@ -234,7 +234,7 @@ Sprigcode is intentionally conservative:
 - conflicting edits fail before writing
 - rollback is part of the transaction lifecycle
 - tests are part of the public contract
-- a green demo is evidence, not marketing
+- a green demo is evidence, not a claim
 
 See `docs/accuracy-contract.md` for the full contract.
 
