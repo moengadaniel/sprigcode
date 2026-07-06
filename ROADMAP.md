@@ -8,7 +8,7 @@ Priority order:
 
 1. make the TypeScript and TSX slice excellent
 2. strengthen fail-closed behavior
-3. make demos and docs immediately convincing
+3. make demos and docs immediately understandable
 4. keep package and CLI ergonomics clear for public use
 
 ## Near-term follow-up
@@ -26,5 +26,5 @@ Priority order:
 
 ## Limitation
 
-Sprigcode only becomes more ambitious after the current slice is obviously
-useful and obviously safe.
+Sprigcode should only become more ambitious after the current slice is well
+tested, clearly documented, and useful in real examples.

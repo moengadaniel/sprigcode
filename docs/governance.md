@@ -1,19 +1,19 @@
 # Governance Summary
 
-Sprigcode uses a BDFL model.
+Sprigcode is maintainer-led.
 
-- BDFL: `moengadaniel`
+- Lead maintainer: `moengadaniel`
 - repository: `moengadaniel/sprigcode`
 
 Why this exists:
 
 - semantic-edit scope needs strong API discipline
-- release claims need one accountable decision-maker
-- complexity creep needs a clear veto point
+- public API and release decisions need clear ownership
+- scope expansion needs a clear decision point
 
 Limitation:
 
-This model optimizes for coherence, not committee consensus.
+This model optimizes for coherence and accountable decisions.
 
 Next:
 

@@ -413,7 +413,7 @@ See `CONTRIBUTING.md`.
 
 ## Governance
 
-Sprigcode uses a BDFL model with `moengadaniel` as final authority on project
+Sprigcode is maintainer-led. `moengadaniel` has final authority on project
 direction, public API design, architecture, and release approval.
 
 See `GOVERNANCE.md`.

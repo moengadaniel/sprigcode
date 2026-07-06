@@ -1,11 +1,11 @@
 # Sprigcode Governance
 
-Sprigcode uses a BDFL model.
+Sprigcode is maintainer-led.
 
-- BDFL: `moengadaniel`
+- Lead maintainer: `moengadaniel`
 - GitHub: `moengadaniel`
 
-## What the BDFL decides
+## What the lead maintainer decides
 
 - project direction
 - public API design
