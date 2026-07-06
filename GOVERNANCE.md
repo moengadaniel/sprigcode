@@ -2,8 +2,8 @@
 
 Sprigcode uses a BDFL model.
 
-- BDFL: `eat-apples`
-- GitHub: `eat-apples`
+- BDFL: `moengadaniel`
+- GitHub: `moengadaniel`
 
 ## What the BDFL decides
 
