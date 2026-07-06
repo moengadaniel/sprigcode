@@ -6,12 +6,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eat-apples/sprigcode.git"
+    "url": "git+https://github.com/moengadaniel/sprigcode.git"
   },
   "bugs": {
-    "url": "https://github.com/eat-apples/sprigcode/issues"
+    "url": "https://github.com/moengadaniel/sprigcode/issues"
   },
-  "homepage": "https://github.com/eat-apples/sprigcode#readme",
+  "homepage": "https://github.com/moengadaniel/sprigcode#readme",
   "files": [
     "README.md",
     "LICENSE",
