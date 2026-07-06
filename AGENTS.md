@@ -144,6 +144,7 @@ Required typed error codes include:
 - `ROLLBACK_FAILED`
 - `WORKSPACE_PATH_ESCAPE`
 - `INTERNAL_ERROR`
+- `GENERATED_FILE_BLOCKED`
 
 ## Public API Discipline
 

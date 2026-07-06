@@ -1,4 +1,5 @@
 import { cp, mkdtemp, readFile, readdir, rm, stat, writeFile } from "node:fs/promises";
+import { existsSync, realpathSync } from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import { ERROR_CODES, sprigcodeError } from "./errors.js";
@@ -18,6 +19,18 @@ export async function writeWorkspaceFile(
 export function resolveWorkspacePath(workspaceRoot: string, relativePath: string): string {
   const resolved = path.resolve(workspaceRoot, relativePath);
   const root = path.resolve(workspaceRoot);
+  assertInsideWorkspace(root, resolved, workspaceRoot, relativePath);
+  assertInsideWorkspace(realpathSync.native(root), realPathForBoundaryCheck(resolved), workspaceRoot, relativePath);
+
+  return resolved;
+}
+
+function assertInsideWorkspace(
+  root: string,
+  resolved: string,
+  workspaceRoot: string,
+  relativePath: string
+): void {
   const relative = path.relative(root, resolved);
 
   if (relative.startsWith("..") || path.isAbsolute(relative)) {
@@ -27,8 +40,23 @@ export function resolveWorkspacePath(workspaceRoot: string, relativePath: string
       { workspaceRoot, relativePath }
     );
   }
+}
 
-  return resolved;
+function realPathForBoundaryCheck(resolvedPath: string): string {
+  if (existsSync(resolvedPath)) {
+    return realpathSync.native(resolvedPath);
+  }
+
+  let ancestor = path.dirname(resolvedPath);
+  while (!existsSync(ancestor)) {
+    const parent = path.dirname(ancestor);
+    if (parent === ancestor) {
+      return resolvedPath;
+    }
+    ancestor = parent;
+  }
+
+  return path.resolve(realpathSync.native(ancestor), path.relative(ancestor, resolvedPath));
 }
 
 export async function copyWorkspaceToTemp(workspaceRoot: string): Promise<string> {
@@ -82,4 +110,3 @@ export async function fileExists(filePath: string): Promise<boolean> {
     return false;
   }
 }
-

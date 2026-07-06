@@ -25,6 +25,9 @@ It promises a narrower and stronger contract:
 - A missing anchor should return `ANCHOR_NOT_FOUND`.
 - An ambiguous anchor should return `ANCHOR_NOT_UNIQUE`.
 - An unsupported syntax shape should return `UNSUPPORTED_SYNTAX`.
+- A path that resolves outside the workspace should return
+  `WORKSPACE_PATH_ESCAPE`.
+- A blocked generated file edit should return `GENERATED_FILE_BLOCKED`.
 - A failed postcondition should return a typed constraint failure.
 
 If Sprigcode cannot prove the edit is safe, it should refuse.

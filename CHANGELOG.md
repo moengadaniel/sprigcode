@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.3
+
+- Hardened workspace path resolution against symlink-based workspace escapes.
+- Added regression coverage for symlink workspace-boundary refusal.
+- Removed stale CODEOWNERS ownership and obsolete pnpm ignore entries.
+- Aligned typed-error documentation with implemented error codes.
+- Removed shell-based Windows process spawning from the npm smoke test.
+- No transaction document format changes.
+
 ## 0.1.2
 
 - Updated repository metadata and package links for `moengadaniel/sprigcode`.

@@ -6,7 +6,7 @@ import { spawn } from "node:child_process";
 
 const root = process.cwd();
 const publicPackages = ["schema", "core", "ts", "testkit", "cli"];
-const npmBin = process.platform === "win32" ? "npm.cmd" : "npm";
+const npmExecPath = process.env.npm_execpath;
 const releaseVersion = JSON.parse(await readFile(path.join(root, "packages", "core", "package.json"), "utf8")).version;
 
 function run(command, args, options = {}) {
@@ -14,7 +14,6 @@ function run(command, args, options = {}) {
     const child = spawn(command, args, {
       cwd: root,
       stdio: ["ignore", "pipe", "pipe"],
-      shell: process.platform === "win32" && command.endsWith(".cmd"),
       ...options
     });
 
@@ -33,6 +32,14 @@ function run(command, args, options = {}) {
   });
 }
 
+function runNpm(args, options = {}) {
+  if (npmExecPath) {
+    return run(process.execPath, [npmExecPath, ...args], options);
+  }
+
+  return run("npm", args, options);
+}
+
 function assert(condition, message, context) {
   if (!condition) {
     const details = context ? `\n${context}` : "";
@@ -46,6 +53,18 @@ function getCliBinPath(consumerRoot) {
     : path.join(consumerRoot, "node_modules", ".bin", "sprigcode");
 }
 
+function getCliEntryPath(consumerRoot) {
+  return path.join(consumerRoot, "node_modules", "@sprigcode", "cli", "dist", "index.js");
+}
+
+function runInstalledCli(consumerRoot, args) {
+  if (process.platform === "win32") {
+    return run(process.execPath, [getCliEntryPath(consumerRoot), ...args], { cwd: consumerRoot });
+  }
+
+  return run(getCliBinPath(consumerRoot), args, { cwd: consumerRoot });
+}
+
 async function main() {
   const packDir = await mkdtemp(path.join(os.tmpdir(), "sprigcode-pack-"));
   const consumerRoot = await mkdtemp(path.join(os.tmpdir(), "sprigcode-consumer-"));
@@ -53,7 +72,7 @@ async function main() {
   try {
     for (const name of publicPackages) {
       const workspace = `@sprigcode/${name}`;
-      const pack = await run(npmBin, ["pack", "--workspace", workspace, "--pack-destination", packDir], {
+      const pack = await runNpm(["pack", "--workspace", workspace, "--pack-destination", packDir], {
         cwd: root
       });
       assert(pack.code === 0, `Packing ${workspace} failed.`, `${pack.stdout}\n${pack.stderr}`);
@@ -79,7 +98,7 @@ async function main() {
       "utf8"
     );
 
-    const install = await run(npmBin, ["install", ...tarballs], { cwd: consumerRoot });
+    const install = await runNpm(["install", ...tarballs], { cwd: consumerRoot });
     assert(install.code === 0, "Installing packed tarballs in a clean consumer failed.", `${install.stdout}\n${install.stderr}`);
 
     const importCheck = await run(
@@ -106,8 +125,9 @@ async function main() {
 
     const cliBin = getCliBinPath(consumerRoot);
     assert(existsSync(cliBin), "Installed sprigcode CLI binary not found.", cliBin);
+    assert(existsSync(getCliEntryPath(consumerRoot)), "Installed sprigcode CLI entrypoint not found.", getCliEntryPath(consumerRoot));
 
-    const help = await run(cliBin, ["--help"], { cwd: consumerRoot });
+    const help = await runInstalledCli(consumerRoot, ["--help"]);
     assert(help.code === 0, "sprigcode --help failed.", `${help.stdout}\n${help.stderr}`);
     assert(help.stdout.includes("Sprigcode CLI"), "sprigcode --help did not print CLI usage.", help.stdout);
 
@@ -137,7 +157,7 @@ async function main() {
     await mkdir(path.join(consumerRoot, "src"), { recursive: true });
     await writeFile(path.join(consumerRoot, "src", "index.ts"), "export const value = 1;\n", "utf8");
 
-    const validate = await run(cliBin, ["validate", "transaction.sprigcode.json"], { cwd: consumerRoot });
+    const validate = await runInstalledCli(consumerRoot, ["validate", "transaction.sprigcode.json"]);
     assert(validate.code === 0, "sprigcode validate failed in clean consumer project.", `${validate.stdout}\n${validate.stderr}`);
     assert(validate.stdout.includes("Transaction document is valid."), "Validate output did not confirm success.", validate.stdout);
   } finally {

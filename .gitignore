@@ -7,14 +7,12 @@ coverage/
 *.tsbuildinfo
 .tsbuildinfo/
 .packs/
-.pnpm-store/
 .vite/
 packages/*/.tsbuildinfo/
 packages/*/node_modules/.vite/
 tmp/
 *.log
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .DS_Store
