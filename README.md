@@ -444,7 +444,7 @@ See `CONTRIBUTING.md`.
 
 ## Governance
 
-Sprigcode uses a BDFL model with `eat-apples` as final authority on project
+Sprigcode uses a BDFL model with `moengadaniel` as final authority on project
 direction, public API design, architecture, and release approval.
 
 See `GOVERNANCE.md`.
